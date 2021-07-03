@@ -3,15 +3,24 @@ import styles from '../styles/Home.module.css'
 import { Table, Space } from 'antd'
 const columns = [
   {
-    title: 'Thermostats Name',
-    dataIndex: 'thermostatsName',
-    key: 'name',
-    render: (text) => <a>{text}</a>,
+    title: 'Application Type',
+    dataIndex: 'applicationType',
+    key: 'applicationType',
   },
   {
-    title: 'Temperature',
-    dataIndex: 'temperature',
-    key: 'temperature',
+    title: 'Event Type',
+    dataIndex: 'eventType',
+    key: 'eventType',
+  },
+  {
+    title: 'Event Description',
+    dataIndex: 'eventDescription',
+    key: 'eventDescription',
+  },
+  {
+    title: 'Time Stamp',
+    dataIndex: 'timeStamp',
+    key: 'timeStamp',
   },
   {
     title: '',
@@ -27,21 +36,27 @@ const columns = [
 const data = [
   {
     key: '1',
-    thermostatsName: 'Kitchen',
-    temperature: '67 F',
+    applicationType: 'Light',
+    eventType: 'Update',
+    eventDescription: 'Update from NO to OFF',
+    timeStamp: 'July 03 2018 15:28:14',
   },
   {
     key: '1',
-    thermostatsName: 'Living Room',
-    temperature: '75 F',
+    applicationType: 'Light',
+    eventType: 'Update',
+    eventDescription: 'Update from NO to OFF',
+    timeStamp: 'July 03 2018 15:28:14',
   },
   {
     key: '1',
-    thermostatsName: 'Bathroom',
-    temperature: '55 F',
+    applicationType: 'Light',
+    eventType: 'Update',
+    eventDescription: 'Update from NO to OFF',
+    timeStamp: 'July 03 2018 15:28:14',
   },
 ]
-export default function Thermostats() {
+export default function LogHistory() {
   return (
     <div className={styles.container}>
       <Head>

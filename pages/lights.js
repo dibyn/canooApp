@@ -1,17 +1,23 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
-import { Table, Space } from 'antd'
+import { Table, Space, Switch } from 'antd'
 const columns = [
   {
-    title: 'Thermostats Name',
+    title: 'Light Name',
     dataIndex: 'thermostatsName',
     key: 'name',
     render: (text) => <a>{text}</a>,
   },
   {
-    title: 'Temperature',
-    dataIndex: 'temperature',
-    key: 'temperature',
+    title: 'Status',
+    dataIndex: 'status',
+    key: 'status',
+    render: () => <Switch checkedChildren='on' unCheckedChildren='off' />,
+  },
+  {
+    title: 'Color',
+    dataIndex: 'color',
+    key: 'color',
   },
   {
     title: '',
@@ -27,21 +33,24 @@ const columns = [
 const data = [
   {
     key: '1',
-    thermostatsName: 'Kitchen',
-    temperature: '67 F',
+    thermostatsName: 'Kitchen Light',
+    status: 'on',
+    color: 'red',
   },
   {
     key: '1',
-    thermostatsName: 'Living Room',
-    temperature: '75 F',
+    thermostatsName: 'Living Room Light',
+    status: 'off',
+    color: 'blue',
   },
   {
     key: '1',
-    thermostatsName: 'Bathroom',
-    temperature: '55 F',
+    thermostatsName: 'Bathroom Light',
+    status: 'on',
+    color: 'yellow',
   },
 ]
-export default function Thermostats() {
+export default function Lights() {
   return (
     <div className={styles.container}>
       <Head>
@@ -53,12 +62,10 @@ export default function Thermostats() {
         <Table
           rowKey='id'
           className='no-border-last'
-          scroll={{ x: 500, y: 'calc(100vh - 500px)' }}
-          pagination={{
-            defaultPageSize: 50,
-          }}
+          scroll={{ x: 500, y: 'calc(100vh - 100px)' }}
           columns={columns}
           dataSource={data}
+          pagination={false}
         />
       </main>
       <footer className={styles.footer}></footer>
