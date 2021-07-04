@@ -4,7 +4,6 @@ import { Table, Space, Button, message } from 'antd'
 import { DeleteOutlined, EditOutlined, PlusOutlined } from '@ant-design/icons'
 import axios from 'axios'
 import CreateForm from '../components/CreateForm'
-
 const data = [
   {
     key: '1',
@@ -22,7 +21,6 @@ const data = [
     temperature: '55 F',
   },
 ]
-
 export default function Thermostats() {
   const [visible, setVisible] = useState(false)
   const [defaultFormValues, setDefaultFormValues] = useState()
