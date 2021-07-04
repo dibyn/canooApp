@@ -3,8 +3,8 @@ import TableWithModal from '../components/TableWithModal'
 const columns = [
   {
     title: 'Thermostats Name',
-    dataIndex: 'thermostatName',
-    key: 'thermostatName',
+    dataIndex: 'thermostat_name',
+    key: 'thermostat_name',
   },
   {
     title: 'Temperature',

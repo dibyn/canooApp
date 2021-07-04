@@ -5,25 +5,25 @@ import TableWithModal from '../components/TableWithModal'
 const columns = [
   {
     title: 'Light Name',
-    dataIndex: 'lightName',
-    key: 'lightName',
+    dataIndex: 'light_name',
+    key: 'light_name',
   },
   {
     title: 'Light Status',
-    dataIndex: 'lightState',
-    key: 'lightState',
-    render: (lightState, record) => (
+    dataIndex: 'light_state',
+    key: 'light_state',
+    render: (light_state, record) => (
       <Switch
-        key={lightState}
-        defaultChecked={lightState}
+        key={light_state}
+        defaultChecked={light_state}
         checkedChildren='on'
         unCheckedChildren='off'
-        onChange={(_lightState) =>
+        onChange={(_light_state) =>
           axios
             .post(
               `http://${process.env.NEXT_PUBLIC_API_URL}:8000/update_light`,
               {
-                light_state: _lightState,
+                light_state: _light_state,
                 id: record.id,
               }
             )
@@ -38,8 +38,8 @@ const columns = [
   },
   {
     title: 'Light Color',
-    dataIndex: 'lightColor',
-    key: 'lightColor',
+    dataIndex: 'light_color',
+    key: 'light_color',
   },
 ]
 const Lights = () => (

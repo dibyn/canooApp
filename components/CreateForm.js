@@ -12,7 +12,7 @@ const CreateForm = ({
   const formProps = {
     thermostat: [
       {
-        name: 'thermostatName',
+        name: 'thermostat_name',
         label: 'Thermostat name',
         rules: [
           {
@@ -36,7 +36,7 @@ const CreateForm = ({
     ],
     light: [
       {
-        name: 'lightName',
+        name: 'light_name',
         label: 'Light name',
         rules: [
           {
@@ -47,7 +47,7 @@ const CreateForm = ({
         renderComponent: <Input placeholder={'ex. Kitchen Light'} />,
       },
       {
-        name: 'lightState',
+        name: 'light_state',
         label: 'Light state',
         rules: [
           {
@@ -56,14 +56,14 @@ const CreateForm = ({
         ],
         renderComponent: (
           <Switch
-            checked={defaultFormValues?.lightState}
+            checked={defaultFormValues?.light_state}
             checkedChildren='on'
             unCheckedChildren='off'
           />
         ),
       },
       {
-        name: 'lightColor',
+        name: 'light_color',
         label: 'Light color',
         rules: [
           {
