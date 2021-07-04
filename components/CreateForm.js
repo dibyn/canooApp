@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Modal, Form, Input, Switch, Select } from 'antd'
+import { Modal, Form, Input, Switch, Radio } from 'antd'
 const CreateForm = ({
   eventKey,
   visible,
@@ -9,17 +9,10 @@ const CreateForm = ({
   isEditForm,
 }) => {
   const [form] = Form.useForm()
-  useEffect(() => {
-    form.resetFields()
-    if (isEditForm) {
-      form.setFieldsValue(defaultFormValues)
-    }
-    return () => form.resetFields()
-  }, [defaultFormValues])
   const formProps = {
     thermostat: [
       {
-        name: 'thermostat_name',
+        name: 'thermostatName',
         label: 'Thermostat name',
         rules: [
           {
@@ -38,12 +31,12 @@ const CreateForm = ({
             message: 'Please input the name of thermostat!',
           },
         ],
-        renderComponent: <Input placeholder={'ex. Kitchen'} />,
+        renderComponent: <Input placeholder={'ex. 105'} />,
       },
     ],
     light: [
       {
-        name: 'light_name',
+        name: 'lightName',
         label: 'Light name',
         rules: [
           {
@@ -54,7 +47,7 @@ const CreateForm = ({
         renderComponent: <Input placeholder={'ex. Kitchen Light'} />,
       },
       {
-        name: 'light_state',
+        name: 'lightState',
         label: 'Light state',
         rules: [
           {
@@ -62,11 +55,15 @@ const CreateForm = ({
           },
         ],
         renderComponent: (
-          <Switch checkedChildren='on' unCheckedChildren='off' />
+          <Switch
+            checked={defaultFormValues?.lightState}
+            checkedChildren='on'
+            unCheckedChildren='off'
+          />
         ),
       },
       {
-        name: 'light_color',
+        name: 'lightColor',
         label: 'Light color',
         rules: [
           {
@@ -75,19 +72,28 @@ const CreateForm = ({
           },
         ],
         renderComponent: (
-          <Select placeholder={'select the light color'}>
-            {['Red', 'Orange', 'Yellow', 'Green', 'Blue'].map((v) => (
-              <Select.Option>{v}</Select.Option>
+          <Radio.Group>
+            {['red', 'orange', 'yellow', 'green', 'blue'].map((value) => (
+              <Radio.Button value={value}>{value.toUpperCase()}</Radio.Button>
             ))}
-          </Select>
+          </Radio.Group>
         ),
       },
     ],
   }
+  useEffect(() => {
+    form.resetFields()
+    if (defaultFormValues) {
+      form.setFieldsValue(defaultFormValues)
+    }
+    return () => form.resetFields()
+  }, [defaultFormValues])
   return (
     <Modal
       visible={visible}
-      title={`${isEditForm ? 'Update thermostat' : 'Create a new thermostat'} `}
+      title={`${
+        isEditForm ? `Update ${eventKey}` : `Create a new ${eventKey}`
+      } `}
       okText={isEditForm ? 'Update' : 'Create'}
       cancelText='Cancel'
       onCancel={() => {
@@ -98,12 +104,12 @@ const CreateForm = ({
         form
           .validateFields()
           .then((values) => {
-            form.resetFields()
-            onCreate(values)
+            const response = onCreate(values)
+            response.then((v) => {
+              v && form.resetFields()
+            })
           })
-          .catch((info) => {
-            console.log('Validate Failed:', info)
-          })
+          .catch((info) => info)
       }}
     >
       <Form form={form} layout='vertical' name='form_in_modal'>

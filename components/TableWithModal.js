@@ -5,45 +5,45 @@ import axios from 'axios'
 import CreateForm from '../components/CreateForm'
 import styles from '../styles/Home.module.css'
 export const TableWithModal = (props) => {
-  const { columns, eventKey, data } = props
+  const { columns, eventKey, getKey } = props
   const [visible, setVisible] = useState(false)
   const [defaultFormValues, setDefaultFormValues] = useState()
-  const [dataSource, setDataSource] = useState(data)
+  const [dataSource, setDataSource] = useState()
   const isEditForm = typeof defaultFormValues === 'object'
   const getData = async () => {
-    const response = await axios.get(
-      `http://${process.env.NEXT_PUBLIC_API_URL}:8000/list_${eventKey}`
-    )
-    response
+    axios
+      .get(`http://${process.env.NEXT_PUBLIC_API_URL}:8000/list_${getKey}`)
       .then((response) => {
-        setDataSource(response.data.data)
+        setDataSource(response.data)
         return response
       })
       .catch((error) => error)
   }
   const onCreate = async (data) => {
-    const response = await axios.post(
-      `http://${process.env.NEXT_PUBLIC_API_URL}:8000/add_${eventKey}`,
-      data
-    )
-    response
+    axios
+      .post(
+        `http://${process.env.NEXT_PUBLIC_API_URL}:8000/${
+          isEditForm ? 'update' : 'add'
+        }_${eventKey}`,
+        data
+      )
       .then(async (response) => {
         setVisible(false)
         await getTableData()
         message.success('Edit Successful')
-        return response
+        return true
       })
-      .catch((error) => error)
+      .catch((error) => false)
   }
   const handleDelete = async (e, id) => {
     e.preventDefault()
-    const response = await axios.delete(
-      `http://${process.env.NEXT_PUBLIC_API_URL}:8000/delete_${eventKey}/${id}`
-    )
-    response
+    axios
+      .delete(
+        `http://${process.env.NEXT_PUBLIC_API_URL}:8000/delete_${eventKey}/${id}`
+      )
       .then((response) => {
         message.success('Delete Successful')
-        getTableData()
+        getData()
         return response
       })
       .catch((error) => error)
@@ -59,7 +59,6 @@ export const TableWithModal = (props) => {
             <a
               onClick={(e) => {
                 e.preventDefault()
-                console.log({ record })
                 setVisible(true)
                 setDefaultFormValues(record)
               }}

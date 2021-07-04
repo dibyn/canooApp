@@ -1,12 +1,13 @@
+import { useEffect } from 'react'
 import axios from 'axios'
 import React, { useState } from 'react'
 import styles from '../styles/Home.module.css'
 import { Table } from 'antd'
 const columns = [
   {
-    title: 'Application Type',
-    dataIndex: 'applicationType',
-    key: 'applicationType',
+    title: 'Appliance Type',
+    dataIndex: 'applianceType',
+    key: 'applianceType',
   },
   {
     title: 'Event Type',
@@ -15,47 +16,22 @@ const columns = [
   },
   {
     title: 'Event Description',
-    dataIndex: 'eventDescription',
-    key: 'eventDescription',
+    dataIndex: 'description',
+    key: 'description',
   },
   {
     title: 'Time Stamp',
-    dataIndex: 'timeStamp',
-    key: 'timeStamp',
-  },
-]
-const data = [
-  {
-    key: '1',
-    applicationType: 'Light',
-    eventType: 'Update',
-    eventDescription: 'Update from NO to OFF',
-    timeStamp: 'July 03 2018 15:28:14',
-  },
-  {
-    key: '1',
-    applicationType: 'Light',
-    eventType: 'Update',
-    eventDescription: 'Update from NO to OFF',
-    timeStamp: 'July 03 2018 15:28:14',
-  },
-  {
-    key: '1',
-    applicationType: 'Light',
-    eventType: 'Update',
-    eventDescription: 'Update from NO to OFF',
-    timeStamp: 'July 03 2018 15:28:14',
+    dataIndex: 'createdOn',
+    key: 'createdOn',
   },
 ]
 export default function LogHistory() {
-  const [dataSource, setDataSource] = useState(data)
+  const [dataSource, setDataSource] = useState()
   const getData = async () => {
-    const response = await axios.get(
-      `http://${process.env.NEXT_PUBLIC_API_URL}:8000/logs`
-    )
-    response
+    const response = await axios
+      .get(`http://${process.env.NEXT_PUBLIC_API_URL}:8000/logs`)
       .then((response) => {
-        setDataSource(response.data.data)
+        setDataSource(response.data)
         return response
       })
       .catch((error) => error)
