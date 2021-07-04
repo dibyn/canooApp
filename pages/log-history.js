@@ -44,9 +44,19 @@ export default function LogHistory() {
       <Table
         rowKey='id'
         className='no-border-last'
-        scroll={{ x: 500, y: 'calc(100vh - 500px)' }}
         pagination={{
           defaultPageSize: 50,
+        }}
+        pagination={{
+          defaultPageSize: 10,
+          showSizeChanger: true,
+          responsive: true,
+          pageSizeOptions: [10, 50, 100, 200, 400],
+        }}
+        scroll={{
+          x: 500,
+          y: 'calc(100vh - 500px)',
+          scrollToFirstRowOnChange: false,
         }}
         columns={columns}
         dataSource={dataSource}

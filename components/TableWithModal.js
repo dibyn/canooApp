@@ -99,9 +99,10 @@ export const TableWithModal = (props) => {
       <main className={styles.main}>
         <Table
           className='no-border-last'
-          scroll={{ x: 500, y: 'calc(100vh - 500px)' }}
-          pagination={{
-            defaultPageSize: 50,
+          scroll={{
+            x: 500,
+            y: 'calc(100vh - 500px)',
+            scrollToFirstRowOnChange: false,
           }}
           columns={__columns}
           dataSource={dataSource}
