@@ -31,9 +31,9 @@ export const TableWithModal = (props) => {
         setVisible(false)
         await getTableData()
         message.success('Edit Successful')
-        return true
+        return response
       })
-      .catch((error) => false)
+      .catch((error) => error)
   }
   const handleDelete = async (e, id) => {
     e.preventDefault()

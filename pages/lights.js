@@ -1,5 +1,6 @@
 import React from 'react'
-import { Switch } from 'antd'
+import axios from 'axios'
+import { Switch, message } from 'antd'
 import TableWithModal from '../components/TableWithModal'
 const columns = [
   {
@@ -11,12 +12,27 @@ const columns = [
     title: 'Light Status',
     dataIndex: 'lightState',
     key: 'lightState',
-    render: (lightState) => (
+    render: (lightState, record) => (
       <Switch
         key={lightState}
         defaultChecked={lightState}
         checkedChildren='on'
         unCheckedChildren='off'
+        onChange={(_lightState) =>
+          axios
+            .post(
+              `http://${process.env.NEXT_PUBLIC_API_URL}:8000/update_light`,
+              {
+                light_state: _lightState,
+                id: record.id,
+              }
+            )
+            .then(async (response) => {
+              message.success(response.data.message)
+              return response
+            })
+            .catch((error) => error)
+        }
       />
     ),
   },
