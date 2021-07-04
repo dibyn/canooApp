@@ -7,8 +7,8 @@ const CreateForm = ({
   onCancel,
   defaultFormValues,
   isEditForm,
+  form,
 }) => {
-  const [form] = Form.useForm()
   const formProps = {
     thermostat: [
       {
@@ -105,6 +105,7 @@ const CreateForm = ({
           .validateFields()
           .then((values) => {
             const response = onCreate(values)
+            console.log({ response })
             response.then((v) => {
               v && form.resetFields()
             })

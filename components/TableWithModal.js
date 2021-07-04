@@ -1,10 +1,14 @@
 import { useState, useEffect } from 'react'
-import { Table, Space, Button, message } from 'antd'
+import { Table, Space, Button, message, Form } from 'antd'
 import { DeleteOutlined, EditOutlined, PlusOutlined } from '@ant-design/icons'
 import axios from 'axios'
 import CreateForm from '../components/CreateForm'
 import styles from '../styles/Home.module.css'
+const capitalizeFirstLetter = (string) => {
+  return string.charAt(0).toUpperCase() + string.slice(1)
+}
 export const TableWithModal = (props) => {
+  const [form] = Form.useForm()
   const { columns, eventKey, getKey } = props
   const [visible, setVisible] = useState(false)
   const [defaultFormValues, setDefaultFormValues] = useState()
@@ -29,8 +33,13 @@ export const TableWithModal = (props) => {
       )
       .then(async (response) => {
         setVisible(false)
-        await getTableData()
-        message.success('Edit Successful')
+        await getData()
+        form.resetFields()
+        message.success(
+          `${capitalizeFirstLetter(eventKey)} ${
+            isEditForm ? 'edited' : 'added'
+          } successful`
+        )
         return response
       })
       .catch((error) =>
@@ -44,7 +53,7 @@ export const TableWithModal = (props) => {
         `http://${process.env.NEXT_PUBLIC_API_URL}:8000/delete_${eventKey}/${id}`
       )
       .then((response) => {
-        message.success('Delete Successful')
+        message.success('Delete successful')
         getData()
         return response
       })
@@ -109,6 +118,7 @@ export const TableWithModal = (props) => {
           isEditForm={isEditForm}
           defaultFormValues={defaultFormValues}
           eventKey={eventKey}
+          form={form}
         />
       </main>
     </>
