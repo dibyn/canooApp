@@ -56,7 +56,7 @@ const CreateForm = ({
         ],
         renderComponent: (
           <Switch
-            checked={defaultFormValues?.light_state}
+            defaultChecked={defaultFormValues?.light_state}
             checkedChildren='on'
             unCheckedChildren='off'
           />
