@@ -33,7 +33,9 @@ export const TableWithModal = (props) => {
         message.success('Edit Successful')
         return response
       })
-      .catch((error) => error)
+      .catch((error) =>
+        message.error(`${isEditForm ? 'Update' : 'Add'} unsuccessful`)
+      )
   }
   const handleDelete = async (e, id) => {
     e.preventDefault()
@@ -46,7 +48,7 @@ export const TableWithModal = (props) => {
         getData()
         return response
       })
-      .catch((error) => error)
+      .catch((error) => message.error(`delete unsuccessful`))
   }
 
   const actions = [
