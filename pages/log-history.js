@@ -55,7 +55,7 @@ export default function LogHistory() {
     )
     response
       .then((response) => {
-        setDataSource(response)
+        setDataSource(response.data.data)
         return response
       })
       .catch((error) => error)
