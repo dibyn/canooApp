@@ -78,36 +78,38 @@ export const TableWithModal = (props) => {
     getData()
   }, [])
   return (
-    <main className={styles.main}>
+    <>
       <Button
         onClick={() => setVisible(true)}
         type='primary'
-        shape='circle'
+        // shape='circle'
         icon={<PlusOutlined />}
-      />
-      <Table
-        className='no-border-last'
-        scroll={{ x: 500, y: 'calc(100vh - 500px)' }}
-        pagination={{
-          defaultPageSize: 50,
-        }}
-        columns={__columns}
-        dataSource={dataSource}
-        pagination={false}
-      />
-      <CreateForm
-        key={eventKey}
-        visible={visible}
-        onCreate={onCreate}
-        onCancel={() => {
-          setVisible(false)
-          setDefaultFormValues()
-        }}
-        isEditForm={isEditForm}
-        defaultFormValues={defaultFormValues}
-        eventKey={eventKey}
-      />
-    </main>
+      >{`Add ${eventKey}`}</Button>
+      <main className={styles.main}>
+        <Table
+          className='no-border-last'
+          scroll={{ x: 500, y: 'calc(100vh - 500px)' }}
+          pagination={{
+            defaultPageSize: 50,
+          }}
+          columns={__columns}
+          dataSource={dataSource}
+          pagination={false}
+        />
+        <CreateForm
+          key={eventKey}
+          visible={visible}
+          onCreate={onCreate}
+          onCancel={() => {
+            setVisible(false)
+            setDefaultFormValues()
+          }}
+          isEditForm={isEditForm}
+          defaultFormValues={defaultFormValues}
+          eventKey={eventKey}
+        />
+      </main>
+    </>
   )
 }
 export default TableWithModal

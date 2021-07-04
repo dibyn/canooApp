@@ -1,12 +1,12 @@
 import React from 'react'
 import '../styles/globals.css'
 import 'antd/dist/antd.css'
-import Layout from '../components/Layout'
+import LayoutComponent from '../components/Layout'
 const MyApp = ({ Component, pageProps }) => {
   return (
-    <Layout {...pageProps}>
+    <LayoutComponent {...pageProps}>
       <Component {...pageProps} />
-    </Layout>
+    </LayoutComponent>
   )
 }
 export default MyApp

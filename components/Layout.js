@@ -1,24 +1,30 @@
 import React from 'react'
-import Header from './Header'
-const layoutStyle = {
-  display: 'flex',
-  flexDirection: 'column',
-  height: '100%',
-  width: '100%',
-}
-const contentStyle = {
-  flex: 1,
-  display: 'flex',
-  flexDirection: 'column',
-}
-const Layout = (props) => {
+import { Layout } from 'antd'
+import HeaderComponent from './Header'
+const { Content } = Layout
+const LayoutComponent = (props) => {
   return (
-    <div className='Layout' style={layoutStyle}>
-      <Header {...props} />
-      <div className='Content' style={contentStyle}>
-        {props.children}
-      </div>
-    </div>
+    <Layout>
+      <HeaderComponent />
+      <Content
+        className='site-layout'
+        style={{ padding: '0 50px', marginTop: 64, background: '#fff' }}
+      >
+        <div
+          className='site-layout-background'
+          style={{ padding: 24, minHeight: '500px' }}
+        >
+          {props.children}
+        </div>
+      </Content>
+      <style>
+        {`
+          .site-layout .site-layout-background {
+            background: #fff;
+          }
+        `}
+      </style>
+    </Layout>
   )
 }
-export default Layout
+export default LayoutComponent
