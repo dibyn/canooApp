@@ -77,7 +77,7 @@ const CreateForm = ({
           },
         ],
         renderComponent: (
-          <Radio.Group>
+          <Radio.Group disabled={isEditForm}>
             {['red', 'orange', 'yellow', 'green', 'blue'].map((value) => (
               <Radio.Button key={value} value={value}>
                 {value.toUpperCase()}
