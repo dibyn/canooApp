@@ -59,6 +59,7 @@ const CreateForm = ({
             defaultChecked={defaultFormValues?.light_state}
             checkedChildren='on'
             unCheckedChildren='off'
+            key={Math.random()}
           />
         ),
       },
@@ -74,7 +75,9 @@ const CreateForm = ({
         renderComponent: (
           <Radio.Group>
             {['red', 'orange', 'yellow', 'green', 'blue'].map((value) => (
-              <Radio.Button value={value}>{value.toUpperCase()}</Radio.Button>
+              <Radio.Button key={value} value={value}>
+                {value.toUpperCase()}
+              </Radio.Button>
             ))}
           </Radio.Group>
         ),
@@ -103,13 +106,7 @@ const CreateForm = ({
       onOk={() => {
         form
           .validateFields()
-          .then((values) => {
-            const response = onCreate(values)
-            console.log({ response })
-            response.then((v) => {
-              v && form.resetFields()
-            })
-          })
+          .then((values) => onCreate(values))
           .catch((info) => info)
       }}
     >
