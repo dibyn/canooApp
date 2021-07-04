@@ -20,7 +20,9 @@ const CreateForm = ({
             message: 'Please input the name of thermostat!',
           },
         ],
-        renderComponent: <Input placeholder={'ex. Kitchen'} />,
+        renderComponent: (
+          <Input disabled={isEditForm} placeholder={'ex. Kitchen'} />
+        ),
       },
       {
         name: 'temperature',
@@ -44,7 +46,9 @@ const CreateForm = ({
             message: 'Please input the name of light!',
           },
         ],
-        renderComponent: <Input placeholder={'ex. Kitchen Light'} />,
+        renderComponent: (
+          <Input disabled={isEditForm} placeholder={'ex. Kitchen Light'} />
+        ),
       },
       {
         name: 'light_state',

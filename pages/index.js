@@ -13,7 +13,7 @@ const columns = [
     render: (temperature) => <span key={temperature}>{temperature} F</span>,
   },
 ]
-const Thermostats = () => (
+const index = () => (
   <TableWithModal
     columns={columns}
     eventKey={'thermostat'}
@@ -21,4 +21,4 @@ const Thermostats = () => (
     getKey={'thermostat'}
   />
 )
-export default Thermostats
+export default index
