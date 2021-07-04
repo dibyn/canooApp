@@ -4,9 +4,8 @@ import { DeleteOutlined, EditOutlined, PlusOutlined } from '@ant-design/icons'
 import axios from 'axios'
 import CreateForm from '../components/CreateForm'
 import styles from '../styles/Home.module.css'
-const capitalizeFirstLetter = (string) => {
-  return string.charAt(0).toUpperCase() + string.slice(1)
-}
+const capitalizeFirstLetter = (string) =>
+  string.charAt(0).toUpperCase() + string.slice(1)
 export const TableWithModal = (props) => {
   const [form] = Form.useForm()
   const { columns, eventKey, getKey } = props
@@ -24,6 +23,7 @@ export const TableWithModal = (props) => {
       .catch((error) => error)
   }
   const onCreate = async (data) => {
+    if (isEditForm) data.id = defaultFormValues.id
     axios
       .post(
         `http://${process.env.NEXT_PUBLIC_API_URL}:8000/${
@@ -37,7 +37,7 @@ export const TableWithModal = (props) => {
         form.resetFields()
         message.success(
           `${capitalizeFirstLetter(eventKey)} ${
-            isEditForm ? 'edited' : 'added'
+            isEditForm ? 'updated' : 'added'
           } successful`
         )
         return response
