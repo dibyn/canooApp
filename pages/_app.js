@@ -4,7 +4,7 @@ import 'antd/dist/antd.css'
 import Layout from '../components/Layout'
 const MyApp = ({ Component, pageProps }) => {
   return (
-    <Layout>
+    <Layout {...pageProps}>
       <Component {...pageProps} />
     </Layout>
   )

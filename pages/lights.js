@@ -1,69 +1,57 @@
-import styles from '../styles/Home.module.css'
-import { Table, Space, Switch } from 'antd'
-import { EditOutlined, DeleteOutlined } from '@ant-design/icons'
+import React from 'react'
+import { Switch } from 'antd'
+import TableWithModal from '../components/TableWithModal'
 const columns = [
   {
     title: 'Light Name',
-    dataIndex: 'thermostatsName',
-    key: 'name',
+    dataIndex: 'light_name',
+    key: 'light_name',
   },
   {
-    title: 'Status',
-    dataIndex: 'status',
-    key: 'status',
-    render: () => <Switch checkedChildren='on' unCheckedChildren='off' />,
-  },
-  {
-    title: 'Color',
-    dataIndex: 'color',
-    key: 'color',
-  },
-  {
-    title: '',
-    key: 'action',
-    render: (text, record) => (
-      <Space key={record.key} size='middle'>
-        <a href='#!'>
-          <EditOutlined />
-        </a>
-        <a href='#!'>
-          <DeleteOutlined />
-        </a>
-      </Space>
+    title: 'Light Status',
+    dataIndex: 'light_state',
+    key: 'light_state',
+    render: (light_state) => (
+      <Switch
+        key={light_state}
+        defaultChecked={light_state}
+        checkedChildren='on'
+        unCheckedChildren='off'
+      />
     ),
+  },
+  {
+    title: 'Light Color',
+    dataIndex: 'light_color',
+    key: 'light_color',
   },
 ]
 const data = [
   {
     key: '1',
-    thermostatsName: 'Kitchen Light',
-    status: 'on',
-    color: 'red',
+    light_name: 'Kitchen Light',
+    light_state: true, //boolean
+    light_color: 'red',
   },
   {
     key: '2',
-    thermostatsName: 'Living Room Light',
-    status: 'off',
-    color: 'blue',
+    light_name: 'Living Room Light',
+    light_state: false, //boolean
+    light_color: 'blue',
   },
   {
     key: '3',
-    thermostatsName: 'Bathroom Light',
-    status: 'on',
-    color: 'yellow',
+    light_name: 'Bathroom Light',
+    light_state: true, //boolean
+    light_color: 'yellow',
   },
 ]
-export default function Lights() {
-  return (
-    <main className={styles.main}>
-      <Table
-        rowKey='id'
-        className='no-border-last'
-        scroll={{ x: 500, y: 'calc(100vh - 100px)' }}
-        columns={columns}
-        dataSource={data}
-        pagination={false}
-      />
-    </main>
-  )
-}
+const Lights = () => (
+  <TableWithModal
+    data={data}
+    columns={columns}
+    eventKey={'light'}
+    key={'light'}
+  />
+)
+export default Lights
