@@ -1,6 +1,5 @@
 import React from 'react'
 import Header from './Header'
-import NavBar from './NavBar'
 const layoutStyle = {
   display: 'flex',
   flexDirection: 'column',
@@ -19,7 +18,6 @@ const Layout = (props) => {
       <div className='Content' style={contentStyle}>
         {props.children}
       </div>
-      {/* <NavBar /> */}
     </div>
   )
 }

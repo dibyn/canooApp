@@ -1,11 +1,11 @@
 import styles from '../styles/Home.module.css'
 import { Table, Space, Switch } from 'antd'
+import { EditOutlined, DeleteOutlined } from '@ant-design/icons'
 const columns = [
   {
     title: 'Light Name',
     dataIndex: 'thermostatsName',
     key: 'name',
-    render: (text) => <a>{text}</a>,
   },
   {
     title: 'Status',
@@ -22,9 +22,13 @@ const columns = [
     title: '',
     key: 'action',
     render: (text, record) => (
-      <Space size='middle'>
-        <a>Edit</a>
-        <a>Delete</a>
+      <Space key={record.key} size='middle'>
+        <a href='#!'>
+          <EditOutlined />
+        </a>
+        <a href='#!'>
+          <DeleteOutlined />
+        </a>
       </Space>
     ),
   },
@@ -37,13 +41,13 @@ const data = [
     color: 'red',
   },
   {
-    key: '1',
+    key: '2',
     thermostatsName: 'Living Room Light',
     status: 'off',
     color: 'blue',
   },
   {
-    key: '1',
+    key: '3',
     thermostatsName: 'Bathroom Light',
     status: 'on',
     color: 'yellow',
