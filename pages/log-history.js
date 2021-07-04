@@ -46,6 +46,21 @@ const data = [
   },
 ]
 export default function LogHistory() {
+  const [dataSource, setDataSource] = useState(data)
+  const getData = async () => {
+    const response = await axios.get(
+      `http://${process.env.NEXT_PUBLIC_API_URL}:8000/logs`
+    )
+    response
+      .then((response) => {
+        setDataSource(response)
+        return response
+      })
+      .catch((error) => error)
+  }
+  useEffect(() => {
+    getData()
+  }, [])
   return (
     <main className={styles.main}>
       <Table
@@ -56,7 +71,7 @@ export default function LogHistory() {
           defaultPageSize: 50,
         }}
         columns={columns}
-        dataSource={data}
+        dataSource={dataSource}
       />
     </main>
   )
