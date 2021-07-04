@@ -9,7 +9,6 @@ const CreateForm = ({
 }) => {
   const [form] = Form.useForm()
   useEffect(() => {
-    console.log({isEditForm})
     form.resetFields()
     if (isEditForm) {
       form.setFieldsValue(defaultFormValues)

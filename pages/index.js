@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
-import styles from '../styles/Home.module.css'
 import { Table, Space, Button, message } from 'antd'
 import { DeleteOutlined, EditOutlined, PlusOutlined } from '@ant-design/icons'
 import axios from 'axios'
 import CreateForm from '../components/CreateForm'
+import styles from '../styles/Home.module.css'
 const data = [
   {
     key: '1',
@@ -74,11 +74,12 @@ export default function Thermostats() {
       title: 'Temperature',
       dataIndex: 'temperature',
       key: 'temperature',
+      render: (temperature) => <span key={temperature}>{temperature} F</span>,
     },
     {
       title: '',
       key: 'action',
-      render: (text, record) => {
+      render: (_, record) => {
         return (
           <Space key={record.key} size='middle'>
             <a
