@@ -27,26 +27,20 @@ const columns = [
 ]
 export default function LogHistory() {
   const [dataSource, setDataSource] = useState()
-  const getData = async () => {
-    const response = await axios
+  const getData = async () =>
+    await axios
       .get(`http://${process.env.NEXT_PUBLIC_API_URL}:8000/logs`)
       .then((response) => {
         setDataSource(response.data)
         return response
       })
       .catch((error) => error)
-  }
-  useEffect(() => {
-    getData()
-  }, [])
+  useEffect(() => getData(), [])
   return (
     <main className={styles.main}>
       <Table
         rowKey='id'
         className='no-border-last'
-        pagination={{
-          defaultPageSize: 50,
-        }}
         pagination={{
           defaultPageSize: 10,
           showSizeChanger: true,

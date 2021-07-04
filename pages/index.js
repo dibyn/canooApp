@@ -1,5 +1,8 @@
 import React from 'react'
 import TableWithModal from '../components/TableWithModal'
+const temperatureDisplay = (temperature) => (
+  <span key={temperature}>{temperature} F</span>
+)
 const columns = [
   {
     title: 'Thermostats Name',
@@ -10,7 +13,7 @@ const columns = [
     title: 'Temperature',
     dataIndex: 'temperature',
     key: 'temperature',
-    render: (temperature) => <span key={temperature}>{temperature} F</span>,
+    render: temperatureDisplay,
   },
 ]
 const index = () => (

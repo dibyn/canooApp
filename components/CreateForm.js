@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useCallback } from 'react'
 import { Modal, Form, Input, Switch, Radio } from 'antd'
 const CreateForm = ({
   eventKey,
@@ -88,12 +88,12 @@ const CreateForm = ({
       },
     ],
   }
-  useEffect(() => {
+  const resetBusiness = () => {
     form.resetFields()
-    if (defaultFormValues) {
-      form.setFieldsValue(defaultFormValues)
-    }
-    return () => form.resetFields()
+    if (defaultFormValues) form.setFieldsValue(defaultFormValues)
+  }
+  useEffect(() => {
+    resetBusiness()
   }, [defaultFormValues])
   return (
     <Modal
@@ -116,7 +116,7 @@ const CreateForm = ({
     >
       <Form form={form} layout='vertical' name='form_in_modal'>
         {formProps[eventKey].map(({ label, name, rules, renderComponent }) => (
-          <Form.Item label={label} name={name} rules={rules}>
+          <Form.Item key={name} label={label} name={name} rules={rules}>
             {renderComponent}
           </Form.Item>
         ))}

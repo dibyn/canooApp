@@ -59,41 +59,37 @@ export const TableWithModal = (props) => {
       })
       .catch((error) => message.error(`delete unsuccessful`))
   }
-
+  const handleEditCallback = (e, record) => {
+    e.preventDefault()
+    setVisible(true)
+    setDefaultFormValues(record)
+  }
+  const editDeleteDisplay = (_, record) => {
+    return (
+      <Space key={record.id} size='middle'>
+        <a onClick={(e) => handleEditCallback(e, record)}>
+          <EditOutlined />
+        </a>
+        <a onClick={(e) => handleDelete(e, record.id)}>
+          <DeleteOutlined />
+        </a>
+      </Space>
+    )
+  }
   const actions = [
     {
       title: '',
       key: 'action',
-      render: (_, record) => {
-        return (
-          <Space key={record.key} size='middle'>
-            <a
-              onClick={(e) => {
-                e.preventDefault()
-                setVisible(true)
-                setDefaultFormValues(record)
-              }}
-            >
-              <EditOutlined />
-            </a>
-            <a onClick={(e) => handleDelete(e, record.id)}>
-              <DeleteOutlined />
-            </a>
-          </Space>
-        )
-      },
+      render: editDeleteDisplay,
     },
   ]
   let __columns = [...columns, ...actions]
-  useEffect(() => {
-    getData()
-  }, [])
+  useEffect(() => getData(), [])
   return (
     <>
       <Button
         onClick={() => setVisible(true)}
         type='primary'
-        // shape='circle'
         icon={<PlusOutlined />}
       >{`Add ${eventKey}`}</Button>
       <main className={styles.main}>
