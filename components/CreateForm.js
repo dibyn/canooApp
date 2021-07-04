@@ -1,14 +1,31 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Modal, Form, Input } from 'antd'
-const CreateForm = ({ visible, onCreate, onCancel }) => {
+const CreateForm = ({
+  visible,
+  onCreate,
+  onCancel,
+  defaultFormValues,
+  isEditForm,
+}) => {
   const [form] = Form.useForm()
+  useEffect(() => {
+    console.log({isEditForm})
+    form.resetFields()
+    if (isEditForm) {
+      form.setFieldsValue(defaultFormValues)
+    }
+    return () => form.resetFields()
+  }, [defaultFormValues])
   return (
     <Modal
       visible={visible}
-      title='Create a new thermostat'
-      okText='Create'
+      title={`${isEditForm ? 'Update thermostat' : 'Create a new thermostat'} `}
+      okText={isEditForm ? 'Update' : 'Create'}
       cancelText='Cancel'
-      onCancel={onCancel}
+      onCancel={() => {
+        form.resetFields()
+        onCancel()
+      }}
       onOk={() => {
         form
           .validateFields()
@@ -21,7 +38,12 @@ const CreateForm = ({ visible, onCreate, onCancel }) => {
           })
       }}
     >
-      <Form form={form} layout='vertical' name='form_in_modal'>
+      <Form
+        form={form}
+        layout='vertical'
+        name='form_in_modal'
+        initialValues={defaultFormValues}
+      >
         <Form.Item
           name='thermostat_name'
           label='Thermostat Name'
@@ -32,7 +54,7 @@ const CreateForm = ({ visible, onCreate, onCancel }) => {
             },
           ]}
         >
-          <Input placeholder={'Name of the thermostat'} />
+          <Input placeholder={'ex. Kitchen'} />
         </Form.Item>
         <Form.Item
           name='temperature'
@@ -43,7 +65,7 @@ const CreateForm = ({ visible, onCreate, onCancel }) => {
             },
           ]}
         >
-          <Input placeholder={'temperature'} type={'number'} suffix='F' />
+          <Input placeholder={'ex. 55'} type={'number'} suffix='F' />
         </Form.Item>
       </Form>
     </Modal>
