@@ -19,7 +19,7 @@ const HeaderComponent = () => {
       }}
     >
       <MainHead title={'Canoo'} />
-      <a href='https://www.canoo.com' target='_blank'>
+      <a href='https://www.canoo.com' rel='noreferrer' target='_blank'>
         <Image
           src='/logo/canoo-logo.svg'
           alt='https://www.canoo.com'
