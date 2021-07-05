@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import Router from 'next/router'
-const index = () => {
+const Index = () => {
   useEffect(() => Router.push('/lights'), [])
-  return <></>
+  return <>loading...</>
 }
-export default index
+export default Index

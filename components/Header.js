@@ -1,18 +1,31 @@
 import React, { useState, useEffect } from 'react'
 import { Menu, Layout } from 'antd'
 import Router from 'next/router'
+import Image from 'next/image'
 import { useRouter } from 'next/router'
-import { AimOutlined } from '@ant-design/icons'
 const { Header } = Layout
 const HeaderComponent = () => {
   const router = useRouter()
   const [selectedKeys, setSelectedKeys] = useState(['/lights'])
   useEffect(() => setSelectedKeys(router.pathname), [router.pathname])
   return (
-    <Header style={{ position: 'fixed', zIndex: 1, width: '100%' }}>
-      <AimOutlined className={'logo'} />
+    <Header
+      style={{
+        position: 'fixed',
+        zIndex: 1,
+        width: '100%',
+        background: '#fff',
+      }}
+    >
+      <a href='https://www.canoo.com' target='_blank'>
+        <Image
+          src='/logo/canoo-logo.svg'
+          alt='https://www.canoo.com'
+          layout='fill'
+        />
+      </a>
       <Menu
-        theme='dark'
+        theme='light'
         mode='horizontal'
         onClick={(e) => {
           setSelectedKeys([e.key])
@@ -32,18 +45,6 @@ const HeaderComponent = () => {
           Logs
         </Menu.Item>
       </Menu>
-      <style>
-        {`
-           .logo {
-              float: left;
-              width: 40px;
-              height: 31px;
-              color: #fff;
-              font-size: 30px;
-              margin: 15px 10px 0 0px;
-            }
-          `}
-      </style>
     </Header>
   )
 }
