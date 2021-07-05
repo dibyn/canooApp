@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Table } from 'antd'
-import LayoutComponent from '../components/Layout'
 import styles from '../styles/Home.module.css'
 import Wrapper from '../components/Wrapper'
 const columns = [
@@ -66,5 +65,4 @@ const LogHistory = () => {
     </Wrapper>
   )
 }
-LogHistory.layout = LayoutComponent
 export default LogHistory

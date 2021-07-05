@@ -2,7 +2,6 @@ import React from 'react'
 import axios from 'axios'
 import { Switch, message } from 'antd'
 import TableWithModal from '../components/TableWithModal'
-import LayoutComponent from '../components/Layout'
 import Wrapper from '../components/Wrapper'
 const lightStateDisplay = (light_state, record) => (
   <Switch
@@ -52,5 +51,4 @@ const Lights = () => (
     />
   </Wrapper>
 )
-Lights.layout = LayoutComponent
 export default Lights
