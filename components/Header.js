@@ -3,6 +3,7 @@ import { Menu, Layout } from 'antd'
 import Router from 'next/router'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
+import MainHead from './head'
 const { Header } = Layout
 const HeaderComponent = () => {
   const router = useRouter()
@@ -17,6 +18,7 @@ const HeaderComponent = () => {
         background: '#fff',
       }}
     >
+      <MainHead title={'Canoo'} />
       <a href='https://www.canoo.com' target='_blank'>
         <Image
           src='/logo/canoo-logo.svg'
