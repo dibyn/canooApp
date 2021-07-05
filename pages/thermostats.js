@@ -1,5 +1,6 @@
 import React from 'react'
 import TableWithModal from '../components/TableWithModal'
+import LayoutComponent from '../components/Layout'
 const temperatureDisplay = (temperature) => (
   <span key={temperature}>{temperature} F</span>
 )
@@ -24,4 +25,5 @@ const Thermostats = () => (
     getKey={'thermostat'}
   />
 )
+Thermostats.layout = LayoutComponent
 export default Thermostats

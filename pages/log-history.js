@@ -1,8 +1,9 @@
 import { useEffect } from 'react'
 import axios from 'axios'
 import React, { useState } from 'react'
-import styles from '../styles/Home.module.css'
 import { Table } from 'antd'
+import LayoutComponent from '../components/Layout'
+import styles from '../styles/Home.module.css'
 const columns = [
   {
     title: 'Appliance Name',
@@ -30,7 +31,7 @@ const columns = [
     key: 'createdOn',
   },
 ]
-export default function LogHistory() {
+const LogHistory = () => {
   const [dataSource, setDataSource] = useState()
   const getData = async () =>
     await axios
@@ -47,14 +48,14 @@ export default function LogHistory() {
         rowKey='id'
         className='no-border-last'
         pagination={{
-          defaultPageSize: 10,
+          defaultPageSize: 20,
           showSizeChanger: true,
           responsive: true,
-          pageSizeOptions: [10, 50, 100, 200, 400],
+          pageSizeOptions: [20, 50, 100, 200, 400],
         }}
         scroll={{
           x: 500,
-          y: 'calc(100vh - 500px)',
+          y: 'calc(100vh - 250px)',
           scrollToFirstRowOnChange: false,
         }}
         columns={columns}
@@ -63,3 +64,5 @@ export default function LogHistory() {
     </main>
   )
 }
+LogHistory.layout = LayoutComponent
+export default LogHistory

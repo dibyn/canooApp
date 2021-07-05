@@ -2,6 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import { Switch, message } from 'antd'
 import TableWithModal from '../components/TableWithModal'
+import LayoutComponent from '../components/Layout'
 const lightStateDisplay = (light_state, record) => (
   <Switch
     key={light_state}
@@ -48,4 +49,5 @@ const Lights = () => (
     key={'light'}
   />
 )
+Lights.layout = LayoutComponent
 export default Lights
