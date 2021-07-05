@@ -66,7 +66,7 @@ export const TableWithModal = (props) => {
   }
   const editDeleteDisplay = (_, record) => {
     return (
-      <Space key={record.id} size='middle'>
+      <Space key={record.id} style={{ float: 'right' }} size='middle'>
         <a onClick={(e) => handleEditCallback(e, record)}>
           <EditOutlined />
         </a>
@@ -97,7 +97,7 @@ export const TableWithModal = (props) => {
           className='no-border-last'
           scroll={{
             x: 500,
-            y: 'calc(100vh - 500px)',
+            y: 'calc(100vh - 250px)',
             scrollToFirstRowOnChange: false,
           }}
           columns={__columns}

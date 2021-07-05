@@ -5,6 +5,11 @@ import styles from '../styles/Home.module.css'
 import { Table } from 'antd'
 const columns = [
   {
+    title: 'Appliance Name',
+    dataIndex: 'applianceName',
+    key: 'applianceName',
+  },
+  {
     title: 'Appliance Type',
     dataIndex: 'applianceType',
     key: 'applianceType',

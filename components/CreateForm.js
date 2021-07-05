@@ -33,7 +33,7 @@ const CreateForm = ({
             message: 'Please input the name of thermostat!',
           },
         ],
-        renderComponent: <Input placeholder={'ex. 105'} />,
+        renderComponent: <Input placeholder={'ex. 105'} suffix={'F'} />,
       },
     ],
     light: [
@@ -55,12 +55,12 @@ const CreateForm = ({
         label: 'Light state',
         rules: [
           {
-            required: true,
+            required: false,
           },
         ],
         renderComponent: (
           <Switch
-            defaultChecked={defaultFormValues?.light_state}
+            defaultChecked={defaultFormValues?.light_state || false}
             checkedChildren='on'
             unCheckedChildren='off'
             key={Math.random()}
@@ -114,7 +114,14 @@ const CreateForm = ({
           .catch((info) => info)
       }}
     >
-      <Form form={form} layout='vertical' name='form_in_modal'>
+      <Form
+        initialValues={{
+          light_state: false,
+        }}
+        form={form}
+        layout='vertical'
+        name='form_in_modal'
+      >
         {formProps[eventKey].map(({ label, name, rules, renderComponent }) => (
           <Form.Item key={name} label={label} name={name} rules={rules}>
             {renderComponent}

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Menu, Layout } from 'antd'
 import Router from 'next/router'
 import { useRouter } from 'next/router'
@@ -6,9 +6,8 @@ import { AimOutlined } from '@ant-design/icons'
 const { Header } = Layout
 const HeaderComponent = () => {
   const router = useRouter()
-  const [selectedKeys, setSelectedKeys] = React.useState([
-    router.pathname === '/' ? '/thermostats' : router.pathname,
-  ])
+  const [selectedKeys, setSelectedKeys] = useState(['/lights'])
+  useEffect(() => setSelectedKeys(router.pathname), [router.pathname])
   return (
     <Header style={{ position: 'fixed', zIndex: 1, width: '100%' }}>
       <AimOutlined className={'logo'} />
@@ -17,7 +16,7 @@ const HeaderComponent = () => {
         mode='horizontal'
         onClick={(e) => {
           setSelectedKeys([e.key])
-          e.key === '/thermostats' ? Router.push(`/`) : Router.push(e.key)
+          Router.push(e.key)
         }}
         selectedKeys={selectedKeys}
         selectable
