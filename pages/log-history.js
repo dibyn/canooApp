@@ -1,9 +1,9 @@
-import { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import React, { useState } from 'react'
 import { Table } from 'antd'
 import LayoutComponent from '../components/Layout'
 import styles from '../styles/Home.module.css'
+import Wrapper from '../components/Wrapper'
 const columns = [
   {
     title: 'Appliance Name',
@@ -43,25 +43,27 @@ const LogHistory = () => {
       .catch((error) => error)
   useEffect(() => getData(), [])
   return (
-    <main className={styles.main}>
-      <Table
-        rowKey='id'
-        className='no-border-last'
-        pagination={{
-          defaultPageSize: 20,
-          showSizeChanger: true,
-          responsive: true,
-          pageSizeOptions: [20, 50, 100, 200, 400],
-        }}
-        scroll={{
-          x: 500,
-          y: 'calc(100vh - 250px)',
-          scrollToFirstRowOnChange: false,
-        }}
-        columns={columns}
-        dataSource={dataSource}
-      />
-    </main>
+    <Wrapper title={'Log History'}>
+      <main className={styles.main}>
+        <Table
+          rowKey='id'
+          className='no-border-last'
+          pagination={{
+            defaultPageSize: 20,
+            showSizeChanger: true,
+            responsive: true,
+            pageSizeOptions: [20, 50, 100, 200, 400],
+          }}
+          scroll={{
+            x: 500,
+            y: 'calc(100vh - 370px)',
+            scrollToFirstRowOnChange: false,
+          }}
+          columns={columns}
+          dataSource={dataSource}
+        />
+      </main>
+    </Wrapper>
   )
 }
 LogHistory.layout = LayoutComponent

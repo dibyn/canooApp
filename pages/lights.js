@@ -3,6 +3,7 @@ import axios from 'axios'
 import { Switch, message } from 'antd'
 import TableWithModal from '../components/TableWithModal'
 import LayoutComponent from '../components/Layout'
+import Wrapper from '../components/Wrapper'
 const lightStateDisplay = (light_state, record) => (
   <Switch
     key={light_state}
@@ -42,12 +43,14 @@ const columns = [
   },
 ]
 const Lights = () => (
-  <TableWithModal
-    columns={columns}
-    eventKey={'light'}
-    getKey={'lights'}
-    key={'light'}
-  />
+  <Wrapper title={'Lights'}>
+    <TableWithModal
+      columns={columns}
+      eventKey={'light'}
+      getKey={'lights'}
+      key={'light'}
+    />
+  </Wrapper>
 )
 Lights.layout = LayoutComponent
 export default Lights

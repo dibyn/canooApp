@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Table, Space, Button, message, Form } from 'antd'
+import { Table, Space, Button, message, Form, Popconfirm } from 'antd'
 import { DeleteOutlined, EditOutlined, PlusOutlined } from '@ant-design/icons'
 import axios from 'axios'
 import CreateForm from '../components/CreateForm'
@@ -64,15 +64,23 @@ export const TableWithModal = (props) => {
     setVisible(true)
     setDefaultFormValues(record)
   }
+
   const editDeleteDisplay = (_, record) => {
     return (
       <Space key={record.id} style={{ float: 'right' }} size='middle'>
         <a onClick={(e) => handleEditCallback(e, record)}>
           <EditOutlined />
         </a>
-        <a onClick={(e) => handleDelete(e, record.id)}>
-          <DeleteOutlined />
-        </a>
+        <Popconfirm
+          title={`Are you sure to delete this ${eventKey}?`}
+          onConfirm={(e) => handleDelete(e, record.id)}
+          okText='Yes'
+          cancelText='No'
+        >
+          <a href='#!'>
+            <DeleteOutlined />
+          </a>
+        </Popconfirm>
       </Space>
     )
   }
@@ -97,7 +105,7 @@ export const TableWithModal = (props) => {
           className='no-border-last'
           scroll={{
             x: 500,
-            y: 'calc(100vh - 250px)',
+            y: 'calc(100vh - 350px)',
             scrollToFirstRowOnChange: false,
           }}
           columns={__columns}

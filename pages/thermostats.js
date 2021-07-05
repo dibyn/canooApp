@@ -1,6 +1,7 @@
 import React from 'react'
 import TableWithModal from '../components/TableWithModal'
 import LayoutComponent from '../components/Layout'
+import Wrapper from '../components/Wrapper'
 const temperatureDisplay = (temperature) => (
   <span key={temperature}>{temperature} F</span>
 )
@@ -18,12 +19,14 @@ const columns = [
   },
 ]
 const Thermostats = () => (
-  <TableWithModal
-    columns={columns}
-    eventKey={'thermostat'}
-    key={'thermostat'}
-    getKey={'thermostat'}
-  />
+  <Wrapper title={'Thermostats'}>
+    <TableWithModal
+      columns={columns}
+      eventKey={'thermostat'}
+      key={'thermostat'}
+      getKey={'thermostat'}
+    />
+  </Wrapper>
 )
 Thermostats.layout = LayoutComponent
 export default Thermostats
